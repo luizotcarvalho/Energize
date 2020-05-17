@@ -2,8 +2,7 @@ extends Node
 
 
 func _ready() -> void:
-	pass
-#	_shuffle_tiles()
+	_shuffle_tiles()
 
 
 func _process(_delta: float) -> void:

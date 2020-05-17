@@ -1,9 +1,9 @@
 extends Node
 
-onready var title_ui = preload("res://ui/title.tscn")
-onready var pause_ui = preload("res://ui/pause.tscn")
-onready var win_ui = preload("res://ui/win.tscn")
-onready var gameover_ui = preload("res://ui/gameover.tscn")
+onready var title_ui = preload("res://ui/Title.tscn")
+onready var pause_ui = preload("res://ui/Pause.tscn")
+onready var win_ui = preload("res://ui/Win.tscn")
+onready var gameover_ui = preload("res://ui/Gameover.tscn")
 
 onready var gray_shader = preload("res://assets/gray.shader")
 var gray_material = ShaderMaterial.new()
@@ -20,15 +20,22 @@ const levels = [
 	preload("res://levels/level_9.tscn"),
 	preload("res://levels/level_10.tscn"),
 ]
+export var current_level_index = 0
+var current_level_instance = null
+
+
+const tutorials = [
+	'Use direcional key\n to move the tiles',
+	'Connecting the energy\n source you gain more time',
+	'Good luck!'
+]
+var current_tutorial_index = 0
 
 onready var camera_target = null
 export var camera_speed = 10
 
-export var current_level_index = 0
-var current_level_instance = null
-
-export var initial_timeleft = 30
-export var extra_time_per_level = 10
+export var initial_timeleft = 60
+export var extra_time_per_level = 30
 var timeleft = null
 
 var is_muted = false
@@ -46,11 +53,28 @@ func _create_level():
 	container.alignment = BoxContainer.ALIGN_CENTER
 	container.add_child(label)
 	container.add_child(level)	
-
+	
+	if current_tutorial_index < len(tutorials):
+		_create_tutorial_ui(container)
+			
 	$Container/Scenes.add_child(container)
 	
 	current_level_instance = container
 	camera_target = container
+
+
+func _create_tutorial_ui(container):
+	var label = Label.new()
+	var wrapper = CenterContainer.new()
+#	wrapper.size = Vector2(100, 50)
+	
+	label.set_text(tutorials[current_tutorial_index])
+	label.set_align(label.ALIGN_CENTER)
+#	label.position -= label.get_size() / 2
+	
+	wrapper.add_child(label)
+	container.add_child(wrapper)
+	current_tutorial_index += 1
 
 
 func _create_title_ui():
@@ -112,13 +136,10 @@ func next_level():
 	if current_level_index < len(levels):
 		if current_level_instance:
 			_disable_level(current_level_instance)
-			
-		_create_level()
-		
-		if current_level_index > 0:
 			$Sounds/NextLevel.play()
 			timeleft += extra_time_per_level
-		
+			
+		_create_level()
 		current_level_index += 1
 		
 	else:
