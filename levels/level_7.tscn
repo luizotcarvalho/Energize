@@ -269,5 +269,3 @@ position = Vector2( 296, 272 )
 
 [node name="Start" parent="." instance=ExtResource( 2 )]
 position = Vector2( 24, 48 )
-[connection signal="area_entered" from="Finish" to="Finish" method="_on_Finish_area_entered"]
-[connection signal="area_exited" from="Finish" to="Finish" method="_on_Finish_area_exited"]

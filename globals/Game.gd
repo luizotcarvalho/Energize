@@ -65,15 +65,9 @@ func _create_level():
 
 func _create_tutorial_ui(container):
 	var label = Label.new()
-	var wrapper = CenterContainer.new()
-#	wrapper.size = Vector2(100, 50)
-	
 	label.set_text(tutorials[current_tutorial_index])
 	label.set_align(label.ALIGN_CENTER)
-#	label.position -= label.get_size() / 2
-	
-	wrapper.add_child(label)
-	container.add_child(wrapper)
+	container.add_child(label)
 	current_tutorial_index += 1
 
 
