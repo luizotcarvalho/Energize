@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://entities/tiles/tile-L.tscn" type="PackedScene" id=1]
+[ext_resource path="res://entities/Start.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entities/Finish.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/images/tilemap.tres" type="TileSet" id=4]
+[ext_resource path="res://entities/tiles/tile-7.tscn" type="PackedScene" id=5]
+[ext_resource path="res://entities/tiles/tile-_.tscn" type="PackedScene" id=6]
+[ext_resource path="res://levels/Level.gd" type="Script" id=7]
+
+[node name="Level 1" type="CenterContainer"]
+use_parent_material = true
+margin_right = 128.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 128, 128 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TileMap" type="TileMap" parent="."]
+use_parent_material = true
+position = Vector2( 64, 64 )
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 32, 32 )
+cell_quadrant_size = 32
+cell_custom_transform = Transform2D( 0, 0, 0, 0, 0, 0 )
+format = 1
+tile_data = PoolIntArray( -65538, 0, 0, -65537, 4, 0, -131072, 4, 0, -131071, 1, 0, -2, 10, 0, -1, 1073741838, 0, -65536, 1073741838, 0, -65535, 7, 0, 65534, 6, 0, 65535, 1073741838, 0, 0, 1073741838, 0, 1, 8, 0, 131070, 3, 0, 131071, 5, 0, 65536, 5, 0, 65537, 2, 0, 196607, 11, 0, 131072, 12, 0 )
+
+[node name="Tiles" type="Node2D" parent="."]
+use_parent_material = true
+position = Vector2( 64, 64 )
+
+[node name="tile" parent="Tiles" instance=ExtResource( 6 )]
+use_parent_material = true
+position = Vector2( 16, 16 )
+input_pickable = true
+
+[node name="tile-L" parent="Tiles" instance=ExtResource( 1 )]
+use_parent_material = true
+position = Vector2( -16, 16 )
+input_pickable = true
+
+[node name="tile-7" parent="Tiles" instance=ExtResource( 5 )]
+use_parent_material = true
+position = Vector2( 16, -16 )
+input_pickable = true
+
+[node name="Start" parent="." instance=ExtResource( 2 )]
+use_parent_material = true
+position = Vector2( 24, 48 )
+
+[node name="Finish" parent="." instance=ExtResource( 3 )]
+use_parent_material = true
+position = Vector2( 104, 80 )

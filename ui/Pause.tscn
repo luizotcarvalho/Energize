@@ -1,0 +1,64 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/font_vcr_osd_mono.tres" type="DynamicFont" id=1]
+[ext_resource path="res://ui/Pause.gd" type="Script" id=2]
+
+[node name="Pause" type="CenterContainer"]
+anchor_top = 0.0021018
+anchor_right = 1.0
+anchor_bottom = 1.0021
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" type="VBoxContainer" parent="."]
+margin_left = 434.0
+margin_top = 245.0
+margin_right = 590.0
+margin_bottom = 353.0
+
+[node name="Continue" type="Button" parent="Menu"]
+margin_right = 156.0
+margin_bottom = 24.0
+focus_mode = 0
+custom_fonts/font = ExtResource( 1 )
+enabled_focus_mode = 0
+text = "Continue"
+flat = true
+
+[node name="Mute" type="Button" parent="Menu"]
+margin_top = 28.0
+margin_right = 156.0
+margin_bottom = 52.0
+focus_mode = 0
+custom_fonts/font = ExtResource( 1 )
+enabled_focus_mode = 0
+text = "Mute music"
+flat = true
+
+[node name="Restart" type="Button" parent="Menu"]
+margin_top = 56.0
+margin_right = 156.0
+margin_bottom = 80.0
+focus_mode = 0
+custom_fonts/font = ExtResource( 1 )
+enabled_focus_mode = 0
+text = "Restart game"
+flat = true
+
+[node name="Exit" type="Button" parent="Menu"]
+margin_top = 84.0
+margin_right = 156.0
+margin_bottom = 108.0
+focus_mode = 0
+custom_fonts/font = ExtResource( 1 )
+enabled_focus_mode = 0
+text = "Exit"
+flat = true
+
+[node name="GUI" type="AudioStreamPlayer" parent="."]
+[connection signal="pressed" from="Menu/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="Menu/Mute" to="." method="_on_Mute_pressed"]
+[connection signal="pressed" from="Menu/Restart" to="." method="_on_Restart_pressed"]
+[connection signal="pressed" from="Menu/Exit" to="." method="_on_Exit_pressed"]

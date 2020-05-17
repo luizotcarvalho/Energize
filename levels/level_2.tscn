@@ -1,0 +1,80 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://entities/tiles/tile-L.tscn" type="PackedScene" id=1]
+[ext_resource path="res://entities/Start.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entities/tiles/tile-0.tscn" type="PackedScene" id=3]
+[ext_resource path="res://entities/Finish.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/images/tilemap.tres" type="TileSet" id=5]
+[ext_resource path="res://entities/tiles/tile-7.tscn" type="PackedScene" id=6]
+[ext_resource path="res://entities/tiles/tile-_.tscn" type="PackedScene" id=7]
+[ext_resource path="res://levels/Level.gd" type="Script" id=9]
+
+[node name="Level 2" type="CenterContainer"]
+use_parent_material = true
+anchor_right = 0.156
+anchor_bottom = 0.267
+margin_right = 0.255997
+margin_bottom = -0.200012
+rect_min_size = Vector2( 160, 160 )
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TileMap" type="TileMap" parent="."]
+use_parent_material = true
+position = Vector2( 96, 96 )
+tile_set = ExtResource( 5 )
+cell_size = Vector2( 32, 32 )
+cell_quadrant_size = 32
+format = 1
+tile_data = PoolIntArray( -131075, 0, 0, -131074, 1073741829, 0, -131073, 1073741829, 0, -196608, 1073741829, 0, -196607, 1, 0, -65539, 10, 0, -65538, 1073741838, 0, -65537, 1073741838, 0, -131072, 1073741838, 0, -131071, 1073741831, 0, -3, 1073741830, 0, -2, 1073741838, 0, -1, 1073741838, 0, -65536, 1073741838, 0, -65535, 1073741831, 0, 65533, 1073741830, 0, 65534, 1073741838, 0, 65535, 1073741838, 0, 0, 1073741838, 0, 1, 1073741832, 0, 131069, 1073741824, 0, 131070, 1073741828, 0, 131071, 1073741828, 0, 65536, 1073741828, 0, 65537, 1073741825, 0, 196606, 11, 0, 196607, 13, 0, 131072, 12, 0 )
+
+[node name="Tiles" type="Node2D" parent="."]
+use_parent_material = true
+position = Vector2( 80, 80 )
+
+[node name="tile4" parent="Tiles" instance=ExtResource( 3 )]
+position = Vector2( 32, -32 )
+
+[node name="tile5" parent="Tiles" instance=ExtResource( 3 )]
+position = Vector2( -32, 32 )
+
+[node name="tile" parent="Tiles" instance=ExtResource( 1 )]
+use_parent_material = true
+position = Vector2( 32, 32 )
+input_pickable = true
+
+[node name="tile2" parent="Tiles" instance=ExtResource( 6 )]
+use_parent_material = true
+position = Vector2( 32, 0 )
+input_pickable = true
+
+[node name="tile9" parent="Tiles" instance=ExtResource( 1 )]
+use_parent_material = true
+position = Vector2( -32, 0 )
+input_pickable = true
+
+[node name="tile10" parent="Tiles" instance=ExtResource( 6 )]
+use_parent_material = true
+position = Vector2( 0, -32 )
+input_pickable = true
+
+[node name="tile11" parent="Tiles" instance=ExtResource( 1 )]
+use_parent_material = true
+position = Vector2( 0, 32 )
+input_pickable = true
+
+[node name="tile3" parent="Tiles" instance=ExtResource( 7 )]
+use_parent_material = true
+input_pickable = true
+
+[node name="Finish" parent="." instance=ExtResource( 4 )]
+use_parent_material = true
+position = Vector2( 136, 112 )
+
+[node name="Start" parent="." instance=ExtResource( 2 )]
+use_parent_material = true
+position = Vector2( 24, 48 )
+[connection signal="area_entered" from="Finish" to="Finish" method="_on_Finish_area_entered"]
+[connection signal="area_exited" from="Finish" to="Finish" method="_on_Finish_area_exited"]

@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/sounds/tile-move.wav" type="AudioStream" id=1]
+[ext_resource path="res://entities/Tile.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 15.4533, 15.5298 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 3.43873
+
+[node name="Tile" type="KinematicBody2D"]
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Connectors" type="Node2D" parent="."]
+
+[node name="Left" type="Area2D" parent="Connectors"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Connectors/Left"]
+position = Vector2( -16, 0 )
+shape = SubResource( 2 )
+
+[node name="Top" type="Area2D" parent="Connectors"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Connectors/Top"]
+position = Vector2( 0, -16 )
+shape = SubResource( 2 )
+
+[node name="Right" type="Area2D" parent="Connectors"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Connectors/Right"]
+position = Vector2( 16, 0 )
+shape = SubResource( 2 )
+
+[node name="Bottom" type="Area2D" parent="Connectors"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Connectors/Bottom"]
+position = Vector2( 0, 16 )
+shape = SubResource( 2 )
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="Move" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 1 )
+volume_db = -20.0
+[connection signal="mouse_entered" from="." to="." method="_on_tile_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_tile_mouse_exited"]
