@@ -289,8 +289,3 @@ func toggle_mute() -> void:
 
 func _play_gui_sound() -> void:
 	$Sounds/GUI.play()
-
-
-func _on_Music_finished() -> void:
-	if not is_muted:
-		$Sounds/Music.play()
