@@ -12,26 +12,26 @@ __meta__ = {
 }
 
 [node name="Container" type="VBoxContainer" parent="."]
-margin_right = 132.0
+margin_right = 300.0
 margin_bottom = 95.0
 
 [node name="Label" type="Label" parent="Container"]
-margin_right = 132.0
+margin_right = 300.0
 margin_bottom = 39.0
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0.00784314, 0.388235, 0.219608, 1 )
-text = "Winner
+text = "Winner! You are the best!
 "
 align = 1
 valign = 1
 
 [node name="Menu" type="VBoxContainer" parent="Container"]
 margin_top = 43.0
-margin_right = 132.0
+margin_right = 300.0
 margin_bottom = 95.0
 
-[node name="Restart" type="Button" parent="Container/Menu"]
-margin_right = 132.0
+[node name="Play again" type="Button" parent="Container/Menu"]
+margin_right = 300.0
 margin_bottom = 24.0
 focus_mode = 0
 custom_fonts/font = ExtResource( 1 )
@@ -39,16 +39,16 @@ enabled_focus_mode = 0
 text = "Play again"
 flat = true
 
-[node name="Exit" type="Button" parent="Container/Menu"]
+[node name="Change mode" type="Button" parent="Container/Menu"]
 margin_top = 28.0
-margin_right = 132.0
+margin_right = 300.0
 margin_bottom = 52.0
 focus_mode = 0
 custom_fonts/font = ExtResource( 1 )
 enabled_focus_mode = 0
-text = "Exit"
+text = "Change mode"
 flat = true
 
 [node name="Win" type="AudioStreamPlayer" parent="."]
-[connection signal="pressed" from="Container/Menu/Restart" to="." method="_on_Restart_pressed"]
-[connection signal="pressed" from="Container/Menu/Exit" to="." method="_on_Exit_pressed"]
+[connection signal="pressed" from="Container/Menu/Play again" to="." method="_on_Play_again_pressed"]
+[connection signal="pressed" from="Container/Menu/Change mode" to="." method="_on_Change_mode_pressed"]

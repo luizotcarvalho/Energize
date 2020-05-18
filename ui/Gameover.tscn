@@ -14,29 +14,28 @@ __meta__ = {
 [node name="Game over" type="AudioStreamPlayer" parent="."]
 
 [node name="Container" type="VBoxContainer" parent="."]
-margin_right = 120.0
-margin_bottom = 95.0
+margin_right = 228.0
+margin_bottom = 74.0
 
 [node name="Label" type="Label" parent="Container"]
-margin_right = 120.0
-margin_bottom = 39.0
+margin_right = 228.0
+margin_bottom = 18.0
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0.815686, 0.109804, 0.211765, 1 )
-text = "Game over
-"
+text = "That's all you got?"
 align = 1
 valign = 1
 
 [node name="Menu" type="VBoxContainer" parent="Container"]
-margin_top = 43.0
-margin_right = 120.0
-margin_bottom = 95.0
+margin_top = 22.0
+margin_right = 228.0
+margin_bottom = 74.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Restart" type="Button" parent="Container/Menu"]
-margin_right = 120.0
+[node name="Try again" type="Button" parent="Container/Menu"]
+margin_right = 228.0
 margin_bottom = 24.0
 focus_mode = 0
 custom_fonts/font = ExtResource( 1 )
@@ -44,14 +43,14 @@ enabled_focus_mode = 0
 text = "Try again"
 flat = true
 
-[node name="Exit" type="Button" parent="Container/Menu"]
+[node name="Change mode" type="Button" parent="Container/Menu"]
 margin_top = 28.0
-margin_right = 120.0
+margin_right = 228.0
 margin_bottom = 52.0
 focus_mode = 0
 custom_fonts/font = ExtResource( 1 )
 enabled_focus_mode = 0
-text = "Exit"
+text = "Change mode"
 flat = true
-[connection signal="pressed" from="Container/Menu/Restart" to="." method="_on_Restart_pressed"]
-[connection signal="pressed" from="Container/Menu/Exit" to="." method="_on_Exit_pressed"]
+[connection signal="pressed" from="Container/Menu/Try again" to="." method="_on_Try_again_pressed"]
+[connection signal="pressed" from="Container/Menu/Change mode" to="." method="_on_Change_mode_pressed"]

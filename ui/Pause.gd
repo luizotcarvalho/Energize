@@ -34,5 +34,5 @@ func _on_Restart_pressed() -> void:
 	game.restart()
 
 
-func _on_Exit_pressed() -> void:
-	game.exit()
+func _on_Change_Mode_pressed() -> void:
+	game.choose_mode()

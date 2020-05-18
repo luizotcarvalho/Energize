@@ -47,18 +47,16 @@ enabled_focus_mode = 0
 text = "Restart game"
 flat = true
 
-[node name="Exit" type="Button" parent="Menu"]
+[node name="Change Mode" type="Button" parent="Menu"]
 margin_top = 84.0
 margin_right = 156.0
 margin_bottom = 108.0
 focus_mode = 0
 custom_fonts/font = ExtResource( 1 )
 enabled_focus_mode = 0
-text = "Exit"
+text = "Change mode"
 flat = true
-
-[node name="GUI" type="AudioStreamPlayer" parent="."]
 [connection signal="pressed" from="Menu/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="pressed" from="Menu/Mute" to="." method="_on_Mute_pressed"]
 [connection signal="pressed" from="Menu/Restart" to="." method="_on_Restart_pressed"]
-[connection signal="pressed" from="Menu/Exit" to="." method="_on_Exit_pressed"]
+[connection signal="pressed" from="Menu/Change Mode" to="." method="_on_Change_Mode_pressed"]

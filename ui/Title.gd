@@ -9,7 +9,7 @@ func _disable_buttons():
 
 func _on_Start_pressed() -> void:
 	_disable_buttons()
-	game.start()
+	game.choose_mode()
 
 
 func _update_mute_label():
@@ -22,7 +22,3 @@ func _update_mute_label():
 func _on_Mute_pressed() -> void:
 	game.toggle_mute()
 	_update_mute_label()
-
-
-func _on_Exit_pressed() -> void:
-	game.exit()

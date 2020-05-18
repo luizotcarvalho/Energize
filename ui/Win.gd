@@ -9,11 +9,11 @@ func _disable_buttons():
 		button.disabled = true
 
 
-func _on_Restart_pressed() -> void:
+func _on_Play_again_pressed() -> void:
 	_disable_buttons()
 	game.restart()
 
 
-func _on_Exit_pressed() -> void:
-	game.exit()
-
+func _on_Change_mode_pressed() -> void:
+	_disable_buttons()
+	game.choose_mode()

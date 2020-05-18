@@ -1,6 +1,7 @@
 extends Node
 
 onready var title_ui = preload("res://ui/Title.tscn")
+onready var mode_ui = preload("res://ui/Mode.tscn")
 onready var pause_ui = preload("res://ui/Pause.tscn")
 onready var win_ui = preload("res://ui/Win.tscn")
 onready var gameover_ui = preload("res://ui/Gameover.tscn")
@@ -34,12 +35,13 @@ var current_tutorial_index = 0
 onready var camera_target = null
 export var camera_speed = 10
 
-export var initial_timeleft = 60
-export var extra_time_per_level = 30
-var timeleft = null
+export var initial_timeleft = 90
+export var extra_time_per_level = 60
+var timeleft = 0
 
 var is_muted = false
 var is_paused = false
+var is_time_attack = false
 
 
 func _create_level():
@@ -75,6 +77,12 @@ func _create_title_ui():
 	var Title = title_ui.instance()
 	$Container/Scenes.add_child(Title)
 	camera_target = Title
+
+
+func _create_mode_ui():
+	var Mode = mode_ui.instance()
+	$Container/Scenes.add_child(Mode)
+	camera_target = Mode
 
 
 func _create_pause_ui():
@@ -128,10 +136,12 @@ func _enable_level(level):
 
 func next_level():
 	if current_level_index < len(levels):
-		if current_level_instance:
+		if current_level_index > 0:
 			_disable_level(current_level_instance)
 			$Sounds/NextLevel.play()
-			timeleft += extra_time_per_level
+			
+			if is_time_attack:
+				timeleft += extra_time_per_level
 			
 		_create_level()
 		current_level_index += 1
@@ -191,34 +201,59 @@ func _stop_timer() -> void:
 	$Canvas/Time.visible = false
 	$Timer.stop()
 
+
+func choose_mode() -> void:
+	_create_mode_ui()
+
 		
-func start() -> void:
-	_play_gui_sound()
+func _start() -> void:
+	is_paused = false
 	current_level_index = 0
 	$Canvas/PauseButton.visible = true
-	_start_timer()
+	
+	_resume_timer()
 	next_level()
+		
+	
+	
+func start_time_attack() -> void:
+	is_time_attack = true
+	_play_gui_sound()
+	_start_timer()
+	_start()
+
+	
+func start_zen() -> void:
+	is_time_attack = false
+	_play_gui_sound()
+	_stop_timer()
+	_start()
+
+
+func _remove_last_scene() -> void:
+	var scene_to_remove = $Container/Scenes.get_child($Container/Scenes.get_child_count() - 1)
+	$Container/Scenes.remove_child(scene_to_remove)
+	scene_to_remove.queue_free()
+	
+	var scene_to_focus = $Container/Scenes.get_child($Container/Scenes.get_child_count() - 1)
+	camera_target = scene_to_focus
 
 
 func pause() -> void:
-	_play_gui_sound()
 	is_paused = true
+	
+	_play_gui_sound()
 	_disable_level(current_level_instance)
 	_pause_timer()
 	_create_pause_ui()
 	
 
 func resume() -> void:
-	_play_gui_sound()
 	is_paused = false
-	var pause_scene = $Container/Scenes.get_node('Pause')
-	$Container/Scenes.remove_child(pause_scene)
-	pause_scene.queue_free()
 	
-	_enable_level(current_level_instance)
-	var last_scene = $Container/Scenes.get_child($Container/Scenes.get_child_count() - 1)
-	camera_target = last_scene
-		
+	_play_gui_sound()
+	_remove_last_scene()
+	_enable_level(current_level_instance)		
 	_resume_timer()
 	$Canvas/PauseButton.visible = true
 
@@ -239,8 +274,7 @@ func gameover() -> void:
 
 func restart() -> void:
 	_play_gui_sound()
-	_resume_timer()
-	start()
+	_start()
 
 
 func toggle_mute() -> void:
@@ -253,9 +287,10 @@ func toggle_mute() -> void:
 		is_muted = true
 
 
-func exit() -> void:
-	get_tree().quit()
-
-
 func _play_gui_sound() -> void:
 	$Sounds/GUI.play()
+
+
+func _on_Music_finished() -> void:
+	if not is_muted:
+		$Sounds/Music.play()

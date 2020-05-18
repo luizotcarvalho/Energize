@@ -109,3 +109,4 @@ stream = ExtResource( 3 )
 volume_db = -10.0
 [connection signal="pressed" from="Canvas/PauseButton" to="." method="pause"]
 [connection signal="timeout" from="Timer" to="." method="_timer_tick"]
+[connection signal="finished" from="Sounds/Music" to="." method="_on_Music_finished"]
