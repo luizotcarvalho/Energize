@@ -27,7 +27,7 @@ var current_level_instance = null
 
 const tutorials = [
 	'Use direcional key\n to move the tiles',
-	'Connecting the energy\n source you gain more time',
+	'Connect the energy\n source to progress',
 	'Good luck!'
 ]
 var current_tutorial_index = 0
@@ -274,7 +274,11 @@ func gameover() -> void:
 
 func restart() -> void:
 	_play_gui_sound()
-	_start()
+	
+	if is_time_attack:
+		start_time_attack()
+	else:
+		start_zen()
 
 
 func toggle_mute() -> void:
